@@ -19,7 +19,7 @@ exports.loginUser = async ({email,password}) => {
     if(!match) throw new Error("Invalid credentials")
 
         const token = jwt.sign({id: user._id,role:user.role}, process.env.token, {
-            expiresIn: "1d"
+            expiresIn: "365d"
         })
         return {token,user}
 }

@@ -19,3 +19,5 @@ app.listen(PORT, () => {
 
 // Import routes
 app.use('/api/v1/auth', require('./src/modules/auth/auth.routes'));
+
+app.use('/api/v1/admin', require('./src/modules/schedule/admin.routes'));
