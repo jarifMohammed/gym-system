@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const User = require('../auth/auth.model')
 const scheduleSchema = new mongoose.Schema({
+    subject:{ type: String, required: true },
     day:{type:Date, required:true},
     startTime:{type:String, required:true},
     endTime:{type:String, required:true},

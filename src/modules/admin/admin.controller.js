@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 // Create a new schedule without assigning a trainer
 exports.createSchedule = async (req, res) => {
   try {
-    const { day, startTime } = req.body;
+    const {subject, day, startTime } = req.body;
     const adminId = req.user.id; // Admin ID from the decoded token
 
     const start = parseInt(startTime.split(":")[0]);
@@ -25,6 +25,7 @@ exports.createSchedule = async (req, res) => {
 
     // Create the schedule without assigning a trainer
     const schedule = await Schedule.create({
+      subject, // Placeholder subject
       day: new Date(day),
       startTime,
       endTime,
@@ -84,6 +85,27 @@ exports.assignTrainer = async (req, res) => {
       .json({ message: "Trainer assigned successfully", schedule });
   } catch (err) {
     console.error("Error:", err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+// Get all schedules created by the logged-in admin
+exports.getAdminSchedules = async (req, res) => {
+  try {
+    const adminId = req.user.id; // Admin ID from the decoded token
+    
+    // Find all schedules where createdBy matches the admin's ID
+    const schedules = await Schedule.find({ createdBy: adminId })
+      .populate('trainer', 'name email') // Populate trainer details
+      .populate('trainees', 'name email') // Populate trainee details
+      .sort({ day: 1, startTime: 1 }); // Sort by day and then by start time
+    
+    res.status(200).json({
+      message: "Schedules retrieved successfully",
+      count: schedules.length,
+      schedules
+    });
+  } catch (err) {
+    console.error("Error fetching admin schedules:", err);
     res.status(500).json({ message: "Internal server error" });
   }
 };

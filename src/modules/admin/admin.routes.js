@@ -9,7 +9,7 @@ const checkRole = require('../../middleware/role.middleware')
 
 
 router.post('/create-schedule',verifyToken,checkRole('admin'),adminController.createSchedule)
-
+router.get('/schedules',verifyToken,checkRole('admin'),adminController.getAdminSchedules)
 router.patch('/assign/:scheduleId',verifyToken,checkRole('admin'), adminController.assignTrainer);
 
 module.exports = router

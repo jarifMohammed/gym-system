@@ -24,3 +24,4 @@ app.use("/api/v1/admin", require("./src/modules/admin/admin.routes"));
 
 app.use("/api/v1/trainer", require("./src/modules/trainer/trainer.route"));
 
+app.use("/api/v1/trainee", require("./src/modules/trainee/trainee.routes"));
