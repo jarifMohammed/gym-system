@@ -11,5 +11,5 @@ router.get('/profile',verifyToken,checkRole('trainee'),traineeController.getProf
 router.put('/updateProfile',verifyToken,checkRole('trainee'),traineeController.updateProfile);
 // Route to book a schedule
 router.post('/:scheduleId/book', verifyToken,checkRole('trainee'),traineeController.bookSchedule);
-router.delete('/bookings/:bookingId',verifyToken,checkRole('trainee'), traineeController.cancelBooking);
+router.delete('/schedule/:scheduleId',verifyToken,checkRole('trainee'), traineeController.cancelBooking);
 module.exports = router;

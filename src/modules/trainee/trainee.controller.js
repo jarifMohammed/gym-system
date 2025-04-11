@@ -72,33 +72,46 @@ exports.bookSchedule = async (req, res) => {
 
   exports.cancelBooking = async (req,res) => {
     try {
-      const booking = await Booking.findById(req.params.bookingId);
+      const { scheduleId } = req.params;
+      const userId = req.user._id;
   
-      if (!booking) {
+      const schedule = await Schedule.findById(scheduleId);
+  
+      if (!schedule) {
         return res.status(404).json({
           success: false,
-          message: "Booking not found",
+          message: "Schedule not found",
         });
       }
   
-      if (booking.trainee.toString() !== req.user._id.toString()) {
+      // Check if the user is in the trainees array
+      const isTrainee = schedule.trainees.some(
+        (traineeId) => traineeId.toString() === userId.toString()
+      );
+  
+      if (!isTrainee) {
         return res.status(403).json({
           success: false,
-          message: "You are not authorized to cancel this booking",
+          message: "You are not authorized to cancel this schedule",
         });
       }
   
-      await Booking.findByIdAndDelete(req.params.bookingId);
+      // Remove the user from the trainees array
+      schedule.trainees = schedule.trainees.filter(
+        (traineeId) => traineeId.toString() !== userId.toString()
+      );
   
-      res.status(200).json({
+      await schedule.save();
+  
+      return res.status(200).json({
         success: true,
-        message: "Booking canceled successfully",
+        message: "You have successfully cancelled your booking for this schedule.",
       });
     } catch (error) {
+      console.error("Cancel booking error:", error);
       res.status(500).json({
         success: false,
-        message: "Server error",
-        error: error.message,
+        message: "Internal server error",
       });
     }
   };
