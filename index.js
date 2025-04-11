@@ -1,7 +1,7 @@
-const express = require('express');
-const connectDB = require('./src/config/db');
-require('dotenv').config(); // Load environment variables from .env file
-const cors = require('cors');
+const express = require("express");
+const connectDB = require("./src/config/db");
+require("dotenv").config(); // Load environment variables from .env file
+const cors = require("cors");
 const app = express();
 
 // Middleware
@@ -18,6 +18,9 @@ app.listen(PORT, () => {
 });
 
 // Import routes
-app.use('/api/v1/auth', require('./src/modules/auth/auth.routes'));
+app.use("/api/v1/auth", require("./src/modules/auth/auth.routes"));
 
-app.use('/api/v1/admin', require('./src/modules/schedule/admin.routes'));
+app.use("/api/v1/admin", require("./src/modules/admin/admin.routes"));
+
+app.use("/api/v1/trainer", require("./src/modules/trainer/trainer.route"));
+
