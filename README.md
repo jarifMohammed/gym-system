@@ -76,7 +76,6 @@ A comprehensive gym management system that handles class scheduling, trainer ass
 - `PUT /api/v1/trainee/profile` - Update trainee profile
 - `DELETE /api/v1/trainee/schedule/:scheduleId/cancel` - Cancel a booking
 
-
 ## Live Hosting
 
 The application is deployed on Render:
@@ -157,5 +156,3 @@ src/
 ├── types/         # TypeScript type definitions
 └── utils/         # Utility functions
 ```
-
-

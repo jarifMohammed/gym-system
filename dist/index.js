@@ -16,6 +16,29 @@ app.use(express_1.default.json());
 app.use((0, cors_1.default)());
 // Connect to database
 (0, db_1.default)();
+// Root endpoint
+app.get("/", (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: "Gym Management System API is running",
+        documentation: "Please visit /api/v1/health for server status",
+        endpoints: {
+            auth: "/api/v1/auth",
+            admin: "/api/v1/admin",
+            trainer: "/api/v1/trainer",
+            trainee: "/api/v1/trainee",
+        },
+    });
+});
+// Health check endpoint
+app.get("/api/v1/health", (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: "Server is running properly",
+        timestamp: new Date().toISOString(),
+        status: "healthy",
+    });
+});
 // Import routes
 const auth_routes_1 = __importDefault(require("./modules/auth/auth.routes"));
 const admin_routes_1 = __importDefault(require("./modules/admin/admin.routes"));
