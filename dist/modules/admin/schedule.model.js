@@ -35,8 +35,8 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
 const scheduleSchema = new mongoose_1.Schema({
-    trainer: { type: mongoose_1.Schema.Types.ObjectId, ref: "User", required: true },
-    createdBy: { type: mongoose_1.Schema.Types.ObjectId, ref: "User", required: true },
+    trainer: { type: mongoose_1.Schema.Types.ObjectId, ref: "User" },
+    createdBy: { type: mongoose_1.Schema.Types.ObjectId, ref: "User" },
     trainees: [{ type: mongoose_1.Schema.Types.ObjectId, ref: "User" }],
     day: { type: String, required: true },
     startTime: { type: String, required: true },

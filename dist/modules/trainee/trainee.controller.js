@@ -118,7 +118,7 @@ const cancelBooking = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     var _a;
     try {
         const { scheduleId } = req.params;
-        const userId = (_a = req.user) === null || _a === void 0 ? void 0 : _a._id;
+        const userId = (_a = req.user) === null || _a === void 0 ? void 0 : _a.id;
         if (!userId) {
             res.status(401).json({ message: "Unauthorized" });
             return;
@@ -132,7 +132,7 @@ const cancelBooking = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             return;
         }
         // Check if the user is in the trainees array
-        const isTrainee = schedule.trainees.some((traineeId) => traineeId.toString() === userId.toString());
+        const isTrainee = schedule.trainees.some((traineeId) => traineeId.toString() === userId);
         if (!isTrainee) {
             res.status(403).json({
                 success: false,
@@ -141,7 +141,7 @@ const cancelBooking = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             return;
         }
         // Remove the user from the trainees array
-        schedule.trainees = schedule.trainees.filter((traineeId) => traineeId.toString() !== userId.toString());
+        schedule.trainees = schedule.trainees.filter((traineeId) => traineeId.toString() !== userId);
         yield schedule.save();
         res.status(200).json({
             success: true,
