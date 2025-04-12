@@ -156,3 +156,159 @@ src/
 ├── types/         # TypeScript type definitions
 └── utils/         # Utility functions
 ```
+
+## 📝 Example Input Formats
+
+### User Registration
+
+```json
+{
+  "fullName": "John Doe",
+  "email": "john.doe@example.com",
+  "password": "securePassword123",
+  "role": "trainee",
+  "age": 28,
+  "gender": "male",
+  "phone": "+1234567890",
+  "address": "123 Fitness St, Workout City"
+}
+```
+
+### User Login
+
+```json
+{
+  "email": "john.doe@example.com",
+  "password": "securePassword123"
+}
+```
+
+### Create Schedule (Admin)
+
+```json
+{
+  "subject": "Strength Training",
+  "day": "2025-04-15",
+  "startTime": "10:00",
+  "endTime": "12:00"
+}
+```
+
+### Assign Trainer to Schedule (Admin)
+
+```json
+{
+  "trainerId": "60d21b4667d0d8992e610c85"
+}
+```
+
+### Book Schedule (Trainee)
+
+```json
+{
+  "scheduleId": "60d21b4667d0d8992e610c86"
+}
+```
+
+### Update User Profile
+
+```json
+{
+  "fullName": "John Updated",
+  "age": 29,
+  "gender": "male",
+  "phone": "+1234567891",
+  "address": "456 Fitness Ave, Workout City"
+}
+```
+
+### Example Responses
+
+#### Successful Registration
+
+```json
+{
+  "success": true,
+  "message": "User registered successfully",
+  "data": {
+    "user": {
+      "fullName": "John Doe",
+      "email": "john.doe@example.com",
+      "role": "trainee",
+      "age": 28,
+      "gender": "male",
+      "phone": "+1234567890",
+      "address": "123 Fitness St, Workout City"
+    }
+  }
+}
+```
+
+#### Successful Schedule Creation
+
+```json
+{
+  "success": true,
+  "message": "Schedule created successfully",
+  "data": {
+    "schedule": {
+      "_id": "67f982fcd5f3d2060404a9a4",
+      "subject": "Strength Training",
+      "day": "2025-04-15T00:00:00.000+00:00",
+      "startTime": "10:00",
+      "endTime": "12:00",
+      "trainer": null,
+      "createdBy": "67f8626caae8db674228fffe",
+      "trainees": [],
+      "status": "scheduled",
+      "createdAt": "2025-04-11T21:00:44.323+00:00",
+      "updatedAt": "2025-04-11T22:07:38.834+00:00",
+      "__v": 0
+    }
+  }
+}
+```
+
+#### Successful Trainer Assignment
+
+```json
+{
+  "success": true,
+  "message": "Trainer assigned successfully",
+  "data": {
+    "schedule": {
+      "_id": "67f982fcd5f3d2060404a9a4",
+      "subject": "Strength Training",
+      "day": "2025-04-15T00:00:00.000+00:00",
+      "startTime": "10:00",
+      "endTime": "12:00",
+      "trainer": "67f98a53955c39fd70809266",
+      "createdBy": "67f8626caae8db674228fffe",
+      "trainees": [],
+      "status": "scheduled",
+      "createdAt": "2025-04-11T21:00:44.323+00:00",
+      "updatedAt": "2025-04-11T22:07:38.834+00:00",
+      "__v": 1
+    }
+  }
+}
+```
+
+#### Successful Booking
+
+```json
+{
+  "success": true,
+  "message": "Class booked successfully",
+  "data": {
+    "schedule": {
+      "day": "Monday",
+      "startTime": "09:00",
+      "endTime": "11:00",
+      "trainees": ["60d21b4667d0d8992e610c85"]
+    }
+  }
+}
+```
+
+
