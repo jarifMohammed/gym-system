@@ -84,8 +84,19 @@ The application is deployed on Render:
 
 ## Admin Credentials
 
-- Email: admin@gmail.com
-- Password: admin
+- **Admin**
+
+  - Email: admin@gmail.com
+  - Password: admin
+
+- **Trainer**
+
+  - Email: trainer@gmail.com
+  - Password: trainer
+
+- **Trainee**
+  - Email: trainee1@gmail.com
+  - Password: trainee1
 
 ## Local Development Setup
 
@@ -282,7 +293,7 @@ src/
       "day": "2025-04-15T00:00:00.000+00:00",
       "startTime": "10:00",
       "endTime": "12:00",
-     🟢  "trainer": "67f98a53955c39fd70809266",
+      "trainer": "67f98a53955c39fd70809266",
       "createdBy": "67f8626caae8db674228fffe",
       "trainees": [],
       "status": "scheduled",
@@ -305,7 +316,7 @@ src/
       "day": "Monday",
       "startTime": "09:00",
       "endTime": "11:00",
-      🟢 "trainees": ["60d21b4667d0d8992e610c85"]
+      "trainees": ["60d21b4667d0d8992e610c85"]
     }
   }
 }
