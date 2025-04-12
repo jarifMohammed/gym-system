@@ -33,6 +33,11 @@ export const createSchedule = async (
       return;
     }
 
+    if (!startTime) {
+      res.status(400).json({ message: "Start time is required" });
+      return;
+    }
+
     const start = parseInt(startTime.split(":")[0]);
     const end = start + 2;
     const endTime = `${end}:00`;
@@ -48,23 +53,26 @@ export const createSchedule = async (
       return;
     }
 
-    // Create the schedule without assigning a trainer
-    const schedule = await Schedule.create({
+    const schedule = new Schedule({
       subject,
       day: new Date(day),
       startTime,
       endTime,
       createdBy: adminId,
-      trainer: null, // Initially no trainer assigned
-      trainees: [], // No trainees yet
     });
 
-    res
-      .status(201)
-      .json({ message: "Schedule created successfully", schedule });
+    await schedule.save();
+
+    res.status(201).json({
+      success: true,
+      message: "Schedule created successfully",
+      schedule,
+    });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({
+      message: "Server error",
+      error: err instanceof Error ? err.message : "Unknown error",
+    });
   }
 };
 
